@@ -3,7 +3,7 @@ Unofficial Docker images with OpenCascade on Alpine/Ubuntu Linux.
 
 Alpine version: 3.18.3 / Ubuntu version: 20.04
 
-OpenCascade version: 7.6.2
+OpenCascade version: 7.7.0
 
 See [Docker Hub](https://hub.docker.com/repository/docker/johannesvhs/opencascade) for all available images.
 
@@ -18,7 +18,7 @@ commented out. See [this stackoverflow issue](https://stackoverflow.com/question
 If you need visual rendering, add Qt5: 
 ```dockerfile
 # On Alpine: 
-RUN apk update && apk add qt5-qtbase-x11v
+RUN apk update && apk add qt5-qtbase-x11
 
 # On Ubuntu: 
 RUN apt-get update && apt-get install libqt5gui5
