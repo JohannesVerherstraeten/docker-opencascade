@@ -1,5 +1,7 @@
 FROM ubuntu:20.04
 
+ENV DEBIAN_FRONTEND=noninteractive
+
 # OpenCascade build tools and dependencies
 # For ubuntu 18.04, see https://realglitch.com/2020/04/how-to-install-opencascade-7-4-on-ubuntu-18-04-lts/
 RUN apt-get update &&  \
