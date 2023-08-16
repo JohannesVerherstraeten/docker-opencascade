@@ -12,13 +12,13 @@ RUN apt-get update &&  \
 # OpenCascade
 RUN mkdir /opencascade && \
     cd /opencascade && \
-    wget https://github.com/Open-Cascade-SAS/OCCT/archive/refs/tags/V7_6_2.tar.gz && \
-    tar zxvf V7_6_2.tar.gz && \
-    rm V7_6_2.tar.gz && \
-    mkdir OCCT-7_6_2/build && \
-    cd OCCT-7_6_2/build && \
+    wget https://github.com/Open-Cascade-SAS/OCCT/archive/refs/tags/V7_7_0.tar.gz && \
+    tar zxvf V7_7_0.tar.gz && \
+    rm V7_7_0.tar.gz && \
+    mkdir OCCT-7_7_0/build && \
+    cd OCCT-7_7_0/build && \
     cmake .. \
     -D CMAKE_BUILD_TYPE=release \
     -D CMAKE_INSTALL_PREFIX=/usr && \
     make -j4 && \
-    make install \
+    make install
