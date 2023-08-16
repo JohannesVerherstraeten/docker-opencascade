@@ -1,11 +1,11 @@
-# alpine-opencascade
+# docker-opencascade
 Unofficial Docker images with OpenCascade on Alpine/Ubuntu Linux. 
 
-Alpine version: 3.18.3
+Alpine version: 3.18.3 / Ubuntu version: 20.04
 
 OpenCascade version: 7.6.2
 
-## Changes
+## Modifications on Alpine
 To be able to build Opencascade on Alpine, some lines in the Opencascade source code had to be
 commented out. See [this stackoverflow issue](https://stackoverflow.com/questions/58554433/opencascade-compilation-failure-on-alpine-linux-with-musl-libc-mallinfo-has-in). 
 - Commented out `mallinfo` function calls (not available in glibc on musl/alpine)
