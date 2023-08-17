@@ -9,10 +9,16 @@ See [Docker Hub](https://hub.docker.com/repository/docker/johannesvhs/opencascad
 
 ## Modifications on Alpine
 To be able to build Opencascade on Alpine, some lines in the Opencascade source code had to be
-commented out. See [this stackoverflow issue](https://stackoverflow.com/questions/58554433/opencascade-compilation-failure-on-alpine-linux-with-musl-libc-mallinfo-has-in). 
+modified. 
+
+Based on [this stackoverflow issue](https://stackoverflow.com/questions/58554433/opencascade-compilation-failure-on-alpine-linux-with-musl-libc-mallinfo-has-in): 
 - Commented out `mallinfo` function calls (not available in glibc on musl/alpine)
 - Commented out `feenableexcept`, `fedisableexcept` and `fegetexcept` function calls (not available in glibc on musl/alpine)
 - Commented out `backtrace` and `backtrace_symbols` function calls (libexecinfo not available anymore on alpine>3.17)
+
+Based on [this bug tracker](https://tracker.dev.opencascade.org/view.php?id=33250):
+ - Add a missing `#include <limits>`
+
 
 ## Visual rendering
 If you need visual rendering, add Qt5: 
