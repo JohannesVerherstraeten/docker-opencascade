@@ -4,7 +4,9 @@ FROM alpine:3.18.3
 RUN apk add --no-cache build-base cmake wget tcl-dev tk-dev libxmu-dev libxi-dev mesa-gl mesa-dev
 
 # OpenCascade
-# Comment out some lines in the opencascade source code
+# Modify some lines in the opencascade source code
+# -> based on https://tracker.dev.opencascade.org/view.php?id=33250
+# - Add the missing limits header file
 # -> based on https://stackoverflow.com/questions/58554433/opencascade-compilation-failure-on-alpine-linux-with-musl-libc-mallinfo-has-in
 # - Comment out references of mallinfo (not available in glibc on musl/alpine)
 # - Comment out references of feenableexcept, fedisableexcept and fegetexcept (not available in glibc on musl/alpine)
@@ -14,6 +16,8 @@ RUN mkdir /opencascade && \
     wget https://github.com/Open-Cascade-SAS/OCCT/archive/refs/tags/V7_7_0.tar.gz && \
     tar zxvf V7_7_0.tar.gz && \
     rm V7_7_0.tar.gz && \
+    awk 'NR == 22 {print "#include <limits>"} {print}' OCCT-7_7_0/src/ViewerTest/ViewerTest_CmdParser.cxx >ViewerTest_CmdParser_tmp.cxx && \
+    mv ViewerTest_CmdParser_tmp.cxx OCCT-7_7_0/src/ViewerTest/ViewerTest_CmdParser.cxx && \
     awk 'NR == 187 { $0 = "//" $0 };  \
          NR == 188 { $0 = "//" $0 };  \
          NR == 189 { $0 = "//" $0 };  \
@@ -51,5 +55,5 @@ RUN mkdir /opencascade && \
     cmake .. \
     -D CMAKE_BUILD_TYPE=release \
     -D CMAKE_INSTALL_PREFIX=/usr && \
-    make && \
+    make -j4 && \
     make install
